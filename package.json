@@ -10,11 +10,12 @@
     "seed": "node ./prisma/seed.js"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "concurrently -k -P \"next dev {@}\" \"yarn worker:dev\" --",
     "worker:dev": "nodemon --skip-project scripts/worker.ts",
     "worker:prod": "ts-node --transpile-only --skip-project scripts/worker.ts",
     "start": "concurrently -P \"next start {@}\" \"yarn worker:prod\" --",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
   },
